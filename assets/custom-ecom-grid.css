@@ -104,7 +104,7 @@
 /* Popup Content Box */
 .custom-popup-content {
   background: #ffffff;
-  padding: 24px;
+  padding: 36px 20px;
   width: 90%;
   max-width: 320px; /* from figma screenshots */
   position: relative;
@@ -395,6 +395,9 @@
   font-family: "Jost", sans-serif;
   font-size: 12px;
   text-align: center;
+}
+.custom-cart-message:empty {
+  display: none;
 }
 .custom-cart-message.success {
   color: #28a745;
