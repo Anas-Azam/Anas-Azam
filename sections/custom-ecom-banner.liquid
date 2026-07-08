@@ -1,0 +1,217 @@
+{{ 'custom-ecom-banner.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div id="Banner-{{ section.id }}" class="custom-banner-section custom-banner-section--{{ section.settings.image_height }} section-{{ section.id }}-padding">
+  {% if section.settings.image_height == 'adapt' and section.settings.image != blank %}
+    <div class="custom-banner-adapt-spacer custom-desktop-only" style="padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;"></div>
+  {% endif %}
+
+
+  {% if section.settings.image != blank %}
+    {%- capture image_class -%}custom-banner-image {% if section.settings.image_mobile != blank %}custom-desktop-only{% endif %}{%- endcapture -%}
+    {{ section.settings.image | image_url: width: 3840 | image_tag: 
+      class: image_class,
+      loading: 'lazy',
+      widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+      sizes: '100vw'
+    }}
+  {% endif %}
+  
+  {% if section.settings.image_mobile != blank %}
+    {{ section.settings.image_mobile | image_url: width: 750 | image_tag: 
+      class: 'custom-banner-image custom-mobile-only',
+      loading: 'lazy',
+      widths: '375, 550, 750',
+      sizes: '100vw'
+    }}
+  {% endif %}
+  
+  {% if section.settings.image == blank and section.settings.image_mobile == blank %}
+    <div class="custom-banner-placeholder">
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  {% endif %}
+
+  <div class="custom-banner-content-wrapper">
+    <div class="custom-banner-content">
+      <h1 class="custom-banner-title">{{ section.settings.title }}</h1>
+      
+      <p class="custom-banner-subtitle {% if section.settings.subtitle_mobile != blank %}custom-desktop-only{% endif %}">
+        {{ section.settings.subtitle }}
+      </p>
+      {% if section.settings.subtitle_mobile != blank %}
+        <p class="custom-banner-subtitle custom-mobile-only">
+          {{ section.settings.subtitle_mobile }}
+        </p>
+      {% endif %}
+
+      {% if section.settings.btn_text != blank %}
+        <a href="{{ section.settings.btn_link }}" class="custom-banner-button">
+          {{ section.settings.btn_text }}
+        
+<svg width="36" height="12" viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.75 4.77295L9.20657e-08 4.77295L-9.20657e-08 6.27295L0.75 6.27295L0.75 4.77295ZM34.9798 6.05328C35.2727 5.76039 35.2727 5.28551 34.9798 4.99262L30.2068 0.21965C29.9139 -0.0732432 29.4391 -0.0732433 29.1462 0.21965C28.8533 0.512544 28.8533 0.987417 29.1462 1.28031L33.3888 5.52295L29.1462 9.76559C28.8533 10.0585 28.8533 10.5334 29.1462 10.8263C29.4391 11.1191 29.9139 11.1191 30.2068 10.8263L34.9798 6.05328ZM0.75 6.27295L34.4495 6.27295L34.4495 4.77295L0.75 4.77295L0.75 6.27295Z" fill="white"/>
+</svg>
+
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% if section.settings.bottom_bar_text != blank %}
+  <div class="custom-banner-bottom-bar {% if section.settings.bottom_bar_text_mobile != blank %}custom-desktop-only{% endif %}">
+    {{ section.settings.bottom_bar_text }}
+  </div>
+{% endif %}
+{% if section.settings.bottom_bar_text_mobile != blank %}
+  <div class="custom-banner-bottom-bar custom-mobile-only">
+    {{ section.settings.bottom_bar_text_mobile }}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Custom Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile Image (Optional)"
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "label": "Banner Height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Banner Title",
+      "default": "The Gift Guide"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Desktop Subtitle",
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle_mobile",
+      "label": "Mobile Subtitle",
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination."
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "bottom_bar_text",
+      "label": "Desktop Bottom Bar Text",
+      "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+    },
+    {
+      "type": "text",
+      "id": "bottom_bar_text_mobile",
+      "label": "Mobile Bottom Bar Text",
+      "default": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Banner",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

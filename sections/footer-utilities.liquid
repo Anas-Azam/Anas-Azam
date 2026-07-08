@@ -12,6 +12,7 @@
 <div
   class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
   {{ section.shopify_attributes }}
+   style="--page-width: var(--custom-blocks-max-width);"
 >
   <div
     class="utilities utilities--blocks-{{ section.blocks.size }} spacing-style"

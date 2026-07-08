@@ -2116,5 +2116,20 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "Custom Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "custom_blocks_max_width",
+        "min": 800,
+        "max": 1600,
+        "step": 20,
+        "unit": "px",
+        "label": "Max Width for Custom Blocks",
+        "default": 1440
+      }
+    ]
   }
 ]
