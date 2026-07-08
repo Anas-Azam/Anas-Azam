@@ -1,0 +1,188 @@
+/* Custom Ecom Header Section */
+.custom-header-section {
+  width: 100%;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+}
+
+.custom-header-content {
+  width: 100%;
+  max-width: var(--custom-blocks-max-width);
+  margin: 0 auto;
+  padding-left: var(--page-margin, 20px);
+  padding-right: var(--page-margin, 20px);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.custom-header-logo-wrapper {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.custom-header-logo {
+  max-height: 24px;
+  width: auto;
+}
+
+.custom-header-text {
+  font-family: "Jost", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 13.42px;
+  color: #000000;
+  text-align: center;
+}
+
+.custom-header-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.custom-header-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 220px;
+  height: 50px;
+  background: linear-gradient(to right, #000000 50%, #fff544 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  color: #000000;
+  text-decoration: none;
+  font-family: "Jost", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  text-transform: uppercase;
+  transition: transform 0.3s ease-out, background-position 0.3s ease-out, color 0.3s ease-out;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.custom-header-button svg {
+  position: absolute;
+  right: 24px;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.custom-header-button svg path {
+  fill: currentColor;
+}
+
+.custom-header-button:hover svg {
+  transform: translateX(4px);
+}
+
+.custom-header-button:hover {
+  background-position: left bottom;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .custom-header-content {
+    justify-content: center;
+    gap: 0;
+  }
+  .custom-header-logo-wrapper {
+    justify-content: center;
+    flex: none;
+  }
+  .custom-header-text,
+  .custom-header-button-wrapper {
+    display: none;
+  }
+}
+
+.custom-header-mobile-menu {
+  display: none;
+}
+.custom-desktop-only {
+  display: flex;
+}
+.custom-header-hamburger {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+}
+.custom-header-section {
+  position: relative;
+}
+
+.custom-header-dropdown {
+  background: #f2f2f2;
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+  border-top: 1px solid #e0e0e0;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.08);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    visibility 0.3s ease;
+  pointer-events: none;
+}
+
+.custom-header-dropdown.is-open {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.custom-dropdown-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 20px;
+  gap: 16px;
+}
+
+.custom-dropdown-text {
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  color: #000;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .custom-header-section {
+    z-index: 100;
+  }
+  .custom-header-mobile-menu {
+    display: block;
+    flex: 1;
+  }
+  .custom-desktop-only {
+    display: none !important;
+  }
+  .custom-header-content {
+    justify-content: flex-start;
+  }
+  .custom-header-logo-wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
+  }
+}

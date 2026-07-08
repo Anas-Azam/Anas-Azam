@@ -36,6 +36,13 @@
     {% endif %}
 
     {{ content_for_header }}
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lustria&display=swap" rel="stylesheet">
+      
+      <style>
+        :root {
+          --custom-blocks-max-width: {{ settings.custom_blocks_max_width | default: 1440 }}px;
+        }
+      </style>
   </head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
@@ -140,5 +147,7 @@
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
     {% endif %}
+
+    <script src="{{ 'custom-ecom-scripts.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>

@@ -1,0 +1,155 @@
+{{ 'custom-ecom-header.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="custom-header-section section-{{ section.id }}-padding">
+  <div class="custom-header-content">
+    
+    <div class="custom-header-mobile-menu">
+      <button class="custom-header-hamburger" aria-expanded="false" aria-controls="custom-dropdown">
+        <svg class="icon-hamburger" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display: none;">
+          <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="custom-header-logo-wrapper">
+      {% if section.settings.logo != blank %}
+        <a href="/"><img src="{{ section.settings.logo | img_url: 'master' }}" class="custom-header-logo" alt="Logo"></a>
+      {% else %}
+        <a href="/"><div style="font-family: 'Avenir LT Std', sans-serif; font-weight: 750; font-size: 24px;">Logo</div></a>
+      {% endif %}
+    </div>
+
+    {% if section.settings.text != blank %}
+      <div class="custom-header-text custom-desktop-only" style="flex-grow: 1; text-align: center; font-family: 'Jost', sans-serif; font-size: 16px;">
+        {{ section.settings.text }}
+      </div>
+    {% endif %}
+    
+    {% if section.settings.button_text != blank %}
+      <div class="custom-header-button-wrapper custom-desktop-only">
+        <a href="{{ section.settings.button_link }}" class="custom-header-button">
+          {{ section.settings.button_text }}
+          <svg width="36" height="12" viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.75 4.77295L9.20657e-08 4.77295L-9.20657e-08 6.27295L0.75 6.27295L0.75 4.77295ZM34.9798 6.05328C35.2727 5.76039 35.2727 5.28551 34.9798 4.99262L30.2068 0.21965C29.9139 -0.0732432 29.4391 -0.0732433 29.1462 0.21965C28.8533 0.512544 28.8533 0.987417 29.1462 1.28031L33.3888 5.52295L29.1462 9.76559C28.8533 10.0585 28.8533 10.5334 29.1462 10.8263C29.4391 11.1191 29.9139 11.1191 30.2068 10.8263L34.9798 6.05328ZM0.75 6.27295L34.4495 6.27295L34.4495 4.77295L0.75 4.77295L0.75 6.27295Z" fill="currentColor"/>
+          </svg>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+
+  <div id="custom-dropdown" class="custom-header-dropdown" aria-hidden="true">
+    <div class="custom-dropdown-content">
+      {% if section.settings.text != blank %}
+        <div class="custom-dropdown-text">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+      
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_link }}" class="custom-header-button">
+          {{ section.settings.button_text }}
+          <svg width="36" height="12" viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.75 4.77295L9.20657e-08 4.77295L-9.20657e-08 6.27295L0.75 6.27295L0.75 4.77295ZM34.9798 6.05328C35.2727 5.76039 35.2727 5.28551 34.9798 4.99262L30.2068 0.21965C29.9139 -0.0732432 29.4391 -0.0732433 29.1462 0.21965C28.8533 0.512544 28.8533 0.987417 29.1462 1.28031L33.3888 5.52295L29.1462 9.76559C28.8533 10.0585 28.8533 10.5334 29.1462 10.8263C29.4391 11.1191 29.9139 11.1191 30.2068 10.8263L34.9798 6.05328ZM0.75 6.27295L34.4495 6.27295L34.4495 4.77295L0.75 4.77295L0.75 6.27295Z" fill="currentColor"/>
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Header Text",
+      "default": "Find the ideal gift for your loved ones."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop All"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop Padding Top",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop Padding Bottom",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 23
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 23
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Header",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

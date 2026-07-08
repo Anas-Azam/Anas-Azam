@@ -11,6 +11,7 @@
 ></div>
 <div
   class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+  style="--page-width: var(--custom-blocks-max-width);"
 >
   {% liquid
     assign total_blocks = section.blocks.size

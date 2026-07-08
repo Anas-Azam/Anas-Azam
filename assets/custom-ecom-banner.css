@@ -1,0 +1,285 @@
+/* Custom Ecom Banner Section */
+.custom-banner-section {
+  position: relative;
+  width: 100%;
+  display: grid;
+  background-color: #f7f7f7;
+}
+
+.custom-banner-section--small {
+  min-height: 400px;
+}
+
+.custom-banner-section--medium {
+  min-height: 600px;
+}
+
+.custom-banner-section--large {
+  min-height: 780px; /* Exact height from Figma Desktop frame */
+}
+
+/* Visibility classes */
+.custom-mobile-only,
+.custom-banner-image.custom-mobile-only,
+.custom-banner-adapt-spacer.custom-mobile-only {
+  display: none !important;
+}
+
+.custom-desktop-only,
+.custom-banner-image.custom-desktop-only,
+.custom-banner-adapt-spacer.custom-desktop-only {
+  display: block !important;
+}
+
+@media (max-width: 768px) {
+  .custom-mobile-only,
+  .custom-banner-image.custom-mobile-only,
+  .custom-banner-adapt-spacer.custom-mobile-only {
+    display: block !important;
+  }
+
+  .custom-desktop-only,
+  .custom-banner-image.custom-desktop-only,
+  .custom-banner-adapt-spacer.custom-desktop-only {
+    display: none !important;
+  }
+}
+
+/* For adapt, we rely on the spacer div created in Liquid */
+.custom-banner-adapt-spacer {
+  grid-area: 1 / 1;
+  width: 100%;
+}
+
+.custom-banner-image,
+.custom-banner-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+}
+
+.custom-banner-placeholder {
+  background-color: #eaeaea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-banner-placeholder svg {
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  fill: #cccccc;
+}
+
+.custom-banner-content-wrapper {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end; /* Align content towards the bottom */
+  justify-content: center;
+  padding: 0; /* Remove double padding */
+  box-sizing: border-box;
+  z-index: 2;
+  position: relative; /* Ensure it stays above the image */
+}
+
+.custom-banner-content {
+  width: 100%;
+  max-width: var(--custom-blocks-max-width);
+  margin: 0 auto;
+  padding-left: var(--page-margin, 20px);
+  padding-right: var(--page-margin, 20px);
+  padding-bottom: 51px; /* Exact distance from button bottom to frame bottom */
+  box-sizing: border-box;
+}
+
+.custom-banner-title {
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  font-size: 70px;
+  line-height: 1em;
+  color: #000000;
+  margin: 0 0 50px 0; /* Exact gap between Title and Subtitle */
+  max-width: 600px;
+}
+
+.custom-banner-subtitle {
+  font-family: "Jost", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.4em;
+  color: #000000;
+  margin: 0 0 50px 0; /* Exact gap between Subtitle and Button */
+  max-width: 483px;
+}
+
+.custom-banner-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 220px;
+  height: 50px;
+  background: linear-gradient(to right, #fff544 50%, #000000 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Jost", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20.48px;
+  text-transform: uppercase;
+  transition:
+    transform 0.3s ease-out,
+    background-position 0.3s ease-out,
+    color 0.3s ease-out;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.custom-banner-button svg {
+  position: absolute;
+  right: 24px;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.custom-banner-button svg path {
+  fill: currentColor;
+}
+
+.custom-banner-button:hover svg {
+  transform: translateX(4px);
+}
+
+.custom-banner-button:hover {
+  transform: translateY(-2px);
+  background-position: left bottom;
+  color: #000000;
+}
+
+@media (max-width: 768px) {
+  .custom-banner-section {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff; /* Match Figma mobile white background */
+  }
+
+  /* Remove fixed min-heights on mobile so content naturally dictates height */
+  .custom-banner-section--small,
+  .custom-banner-section--medium,
+  .custom-banner-section--large,
+  .custom-banner-section--adapt {
+    min-height: 0 !important;
+  }
+
+  .custom-banner-adapt-spacer {
+    display: none !important; /* Not needed since image is in flow */
+  }
+
+  /* Image sits below text in normal document flow */
+  .custom-banner-image,
+  .custom-banner-placeholder {
+    position: relative !important;
+    top: auto;
+    bottom: auto;
+    order: 2;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .custom-banner-section--small .custom-banner-image,
+  .custom-banner-section--medium .custom-banner-image,
+  .custom-banner-section--large .custom-banner-image,
+  .custom-banner-section--small .custom-banner-placeholder,
+  .custom-banner-section--medium .custom-banner-placeholder,
+  .custom-banner-section--large .custom-banner-placeholder {
+    height: 264px !important;
+  }
+
+  .custom-banner-section--adapt .custom-banner-image,
+  .custom-banner-section--adapt .custom-banner-placeholder {
+    height: auto !important;
+  }
+
+  .custom-banner-content-wrapper {
+    position: static;
+    order: 1;
+    height: auto;
+    padding: 0;
+  }
+
+  .custom-banner-content {
+    position: static;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 49px; /* title y: 49 */
+    padding-bottom: 12px; /* space between text and image (157 - 145 = 12) */
+    padding-left: 17px;
+    padding-right: 17px;
+  }
+
+  .custom-banner-title {
+    font-size: 30px;
+    margin: 0 0 24px 0; /* 103 - (49+30) = 24 */
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .custom-banner-subtitle {
+    font-size: 16px;
+    margin: 0;
+    text-align: center;
+    max-width: 340px;
+  }
+
+  /* Button is absolute positioned to overlay the image at the bottom */
+  .custom-banner-button {
+    position: absolute;
+    bottom: 38px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    padding: 13px 20px;
+    height: auto;
+    gap: 10px;
+  }
+
+  .custom-banner-button:hover {
+    transform: translateX(-50%) translateY(-2px);
+  }
+}
+
+/* Bottom Bar */
+.custom-banner-bottom-bar {
+  width: 100%;
+  background-color: #f5f5f5;
+  padding: 10px 50px;
+  text-align: center;
+  font-family: "Jost", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.2em;
+  color: #000000;
+  text-transform: uppercase;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .custom-banner-bottom-bar {
+    padding: 15px 20px;
+    font-size: 14px;
+  }
+}
